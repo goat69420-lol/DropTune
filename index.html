@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DropTune v1.9 Album Database</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="mist" class="mist"></div>
+  <div id="cursorDot" class="cursorDot"></div>
+  <div id="cursorRing" class="cursorRing"></div>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="logoBox"><h1>🎵 DropTune</h1><p>v1.9 Album Database</p></div>
+      <nav>
+        <button class="navButton active" data-screen="homeScreen">🏠 <span>Home</span></button>
+        <button class="navButton" data-screen="packsScreen">📦 <span>Packs</span></button>
+        <button class="navButton" data-screen="collectionScreen">💿 <span>Collection</span></button>
+        <button class="navButton" data-screen="albumsScreen">📚 <span>Albums</span></button>
+        <button class="navButton" data-screen="databaseScreen">🗂 <span>Album DB</span></button>
+        <button class="navButton" data-screen="shopScreen">🛒 <span>Daily Shop</span></button>
+        <button class="navButton" data-screen="levelScreen">⭐ <span>Level Road</span></button>
+        <button class="navButton" data-screen="achievementsScreen">🏅 <span>Achievements</span></button>
+        <button class="navButton" data-screen="profileScreen">👤 <span>Profile</span></button>
+        <button class="navButton" data-screen="settingsScreen">⚙ <span>Settings</span></button>
+      </nav>
+    </aside>
+
+    <main class="mainContent">
+      <header class="topbar">
+        <div>
+          <h2>Welcome back, <b id="profileNameTop">Panie</b></h2>
+          <p id="saveVersionText">Hard economy / clean collection build.</p>
+        </div>
+        <div class="topStats">
+          <div class="stat"><span>💰</span><div><h3 id="coins">0</h3><p>Coins</p></div></div>
+          <div class="stat"><span>⭐</span><div><h3 id="level">1</h3><p>Level</p></div></div>
+          <div class="stat"><span>💿</span><div><h3 id="tracksOwned">0</h3><p>Tracks</p></div></div>
+          <div class="stat claimStat"><span>🔔</span><div><h3 id="claimableCount">0</h3><p>Claimable</p></div></div>
+        </div>
+      </header>
+
+      <section class="screen active" id="homeScreen">
+        <div class="homeHero" id="homeBanner">
+          <div>
+            <p class="smallTitle">YOUR ACCOUNT</p>
+            <h1 id="heroLevel">LEVEL 1</h1>
+            <p id="levelRank">Rookie Collector</p>
+            <div class="xpBar"><div class="xpFill" id="xpFill"></div></div>
+            <p id="xpText">0 / 500 XP</p>
+          </div>
+          <div class="heroRight">
+            <div class="levelBadge" id="levelBadge">⭐</div>
+            <div class="playerTitle" id="playerTitle">Starter Collector</div>
+          </div>
+        </div>
+
+        <div class="quickActions">
+          <button class="quickBtn texture" data-screen="packsScreen">📦<span>Open Pack</span></button>
+          <button class="quickBtn texture" data-screen="albumsScreen">📚<span>Albums</span></button>
+          <button class="quickBtn texture" data-screen="shopScreen">🛒<span>Daily Shop</span></button>
+          <button class="quickBtn texture" data-screen="achievementsScreen">🏅<span>Achievements</span></button>
+        </div>
+
+        <div class="grid2">
+          <div class="panel featuredAlbumWide" id="featuredAlbumPanel"></div>
+          <div class="panel dailyPanel">
+            <h3>🔥 Daily Login</h3>
+            <h2 id="dailyRewardTitle">+25 Coins</h2>
+            <p id="dailyStreakText">Streak: 0</p>
+            <button class="texture" id="dailyClaimBtn">Claim</button>
+          </div>
+        </div>
+
+        <div class="dashboardGrid">
+          <div class="panel"><h3>💸 Hard Economy</h3><p>Startujesz z 1000 coins. Basic Pack kosztuje 250 coins. Hajs farmi się wolniej.</p></div>
+          <div class="panel"><h3>🛒 Daily Shop</h3><p>Nie da się kupić wszystkich kart. Sklep pokazuje tylko kilka itemów dziennie.</p></div>
+          <div class="panel"><h3>🔔 Claim Alerts</h3><p>Zakładki podświetlają się, gdy masz coś do odebrania.</p></div>
+          <div class="panel"><h3>🎧 Audio Preview</h3><p>Po dodaniu mp3 do assets/previews popup tracka odtworzy urywek.</p></div>
+        </div>
+      </section>
+
+      <section class="screen" id="packsScreen">
+        <h1 class="pageTitle">📦 Packs</h1>
+        <p class="subText">Kup paczkę, poczekaj na animację, potem klikaj wybrane płyty, żeby odkrywać tracki.</p>
+        <div class="packsGrid" id="packsGrid"></div>
+        <div id="lastDropBox" class="panel lastDropBox">Open a pack to reveal a card.</div>
+      </section>
+
+      <section class="screen" id="collectionScreen">
+        <h1 class="pageTitle">💿 Collection</h1>
+        <div class="collectionTopBar">
+          <input id="searchInput" placeholder="Search track, artist, album..." />
+          <select id="filterRarity"><option value="">All rarities</option><option>Common</option><option>Uncommon</option><option>Rare</option><option>Epic</option><option>Legendary</option><option>Divine</option></select>
+          <select id="sortCollection"><option value="newest">Newest</option><option value="value">Highest value</option><option value="rating">Highest rating</option><option value="album">Album</option></select>
+        </div>
+        <div id="collectionGrid" class="collectionGrid"></div>
+      </section>
+
+      <section class="screen" id="albumsScreen">
+        <h1 class="pageTitle">📚 Albums</h1>
+        <p class="subText">Posiadane tracki świecą na zielono. Brakujące są ukryte, przygaszone i lekko czerwone.</p>
+        <div id="albumsGrid" class="albumsGrid"></div>
+      </section>
+
+
+      <section class="screen" id="databaseScreen">
+        <h1 class="pageTitle">🗂 Album Database v1.9</h1>
+        <p class="subText">Tu widzisz, jakie pliki okładek i preview musisz wrzucić. Albumy dodajesz w <code>database.js</code>, a gra sama robi rarity, value, album progress, drop system i Daily Shop.</p>
+        <div class="grid2">
+          <div class="panel">
+            <h3>Jak działa baza</h3>
+            <p>Każdy album ma listę tracków z Twoją oceną. Rating sam zmienia się w rarity i value.</p>
+            <p><b>X/null</b> = Common / intro / skit. <b>10</b> = Divine. <b>9–9.5</b> = Legendary.</p>
+          </div>
+          <div class="panel">
+            <h3>Template albumu</h3>
+            <pre id="albumTemplateBox" class="templateBox"></pre>
+          </div>
+        </div>
+        <div id="databaseTools" class="dbGrid"></div>
+      </section>
+
+      <section class="screen" id="shopScreen">
+        <h1 class="pageTitle">🛒 Daily Shop</h1>
+        <p class="subText">Kilka wybranych itemów dziennie. Legendary i Divine są bardzo rzadkie.</p>
+        <div class="shopHeader"><div><h2 id="shopDateText">Today</h2><p id="shopHintText">Refresh raz dziennie.</p></div><button class="texture ownerOnly" id="shopRerollBtn">Owner reroll</button></div>
+        <div id="shopGrid" class="marketGrid"></div>
+      </section>
+
+      <section class="screen" id="levelScreen">
+        <h1 class="pageTitle">⭐ Level Road</h1>
+        <div class="levelSummary"><div><h2 id="levelRoadTitle">Level 1</h2><p id="levelRoadRank">Rookie Collector</p></div><button class="texture" id="claimAllLevelBtn">Claim available</button></div>
+        <div id="levelRoad" class="levelRoad"></div>
+      </section>
+
+      <section class="screen" id="achievementsScreen">
+        <h1 class="pageTitle">🏅 Achievements</h1>
+        <p class="subText">Dużo cięższe cele. Nagrody dają title, coins, XP i badges.</p>
+        <div id="achievementsGrid" class="achievementsGrid"></div>
+      </section>
+
+      <section class="screen" id="profileScreen">
+        <h1 class="pageTitle">👤 Profile</h1>
+        <div class="profileLayout">
+          <div class="panel profileCard">
+            <div class="profileBanner" id="profileBanner"><div class="avatarLarge">🎧</div></div>
+            <h2 id="profileName">Panie</h2>
+            <p id="profileTitleText">Starter Collector</p>
+            <p>Created: <span id="accountCreated"></span></p>
+            <div class="profileOptions">
+              <label>Banner</label>
+              <select id="bannerSelect"><option value="green">Dark Green</option><option value="blue">Blue Neon</option><option value="gold">Gold</option><option value="red">Red Smoke</option></select>
+              <label>Title</label>
+              <select id="titleSelect"></select>
+            </div>
+            <div id="badgesBox" class="badgesBox"></div>
+          </div>
+          <div class="stack">
+            <div class="panel profileDropPanel"><h3>First Drop</h3><div id="firstDropBox"></div></div>
+            <div class="panel profileDropPanel"><h3>Favourite Drop</h3><div id="favoriteTrackBox"></div></div>
+            <div class="panel"><h3>Stats</h3><div id="profileStats"></div></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="screen" id="settingsScreen">
+        <h1 class="pageTitle">⚙ Settings</h1>
+        <div class="settingsGrid">
+          <div class="panel"><h3>Save</h3><button class="texture" id="exportSaveBtn">Export Save</button><button class="texture" id="importSaveBtn">Import Save</button></div>
+          <div class="panel"><h3>Danger</h3><button class="texture danger" id="resetBtn">Reset Game</button></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div id="popup" class="popup hidden"></div>
+  <div id="packOverlay" class="packOverlay hidden">
+    <div class="overlayInner">
+      <div id="packIntro" class="packIntro">
+        <div class="packStage">
+          <div class="lightBurst"></div>
+          <div class="packBox3D"><div class="packLid"></div><div class="packFace" id="packFaceText">DropTune</div></div>
+        </div>
+        <h2 id="openingTitle">Opening...</h2>
+      </div>
+      <div id="revealPhase" class="revealPhase hidden">
+        <h2 id="revealTitle">Choose a vinyl to reveal</h2>
+        <p id="revealHint">Klikaj płyty w dowolnej kolejności.</p>
+        <div id="packRevealGrid" class="packRevealGrid"></div>
+        <button class="texture hidden" id="finishRevealBtn">Finish</button>
+      </div>
+    </div>
+  </div>
+  <div id="toast" class="toast hidden"></div>
+  <script src="database.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
